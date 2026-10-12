@@ -61,7 +61,7 @@
   }
   document.addEventListener('click',function(ev){
     var t=ev.target.closest('[data-act]');if(!t)return;
-    if(t.getAttribute('data-act')==='save'){location.href='contact.vcf';return;}
+    if(t.getAttribute('data-act')==='save'){if(/Android/i.test(navigator.userAgent)){var e=function(v){return encodeURIComponent(String(v||''))};var vcf=location.href.split('#')[0].replace(/[^\/]*$/,'')+'contact.vcf';location.href='intent://contact#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;'+'S.name='+e(D.name)+';S.phone='+e(D.phone)+';S.email='+e(D.email)+';S.company='+e(D.company)+';S.job_title='+e(D.title)+';S.notes='+e(location.href.split('#')[0])+';S.browser_fallback_url='+e(vcf)+';end';return;}location.href='contact.vcf';return;}
     if(t.getAttribute('data-act')==='qr'){
       var dlg=document.getElementById('vc-qr');var box=document.getElementById('vc-qr-box');box.innerHTML='';
       if(window.QRCode){new QRCode(box,{text:location.href.split('#')[0],width:220,height:220,correctLevel:QRCode.CorrectLevel.M})}else{box.textContent=location.href}
